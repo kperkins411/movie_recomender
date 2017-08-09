@@ -86,10 +86,10 @@ movie_in, m = embedding_input('movie_in', n_movies, n_factors, 1e-4)
 
 # create subset
 g=ratings.groupby('userId')['rating'].count()
-topUsers=g.sort_values(ascending=False)[:15]
+topUsers=g.sort_values(ascending=False)[:-1]
 
 g=ratings.groupby('movieId')['rating'].count()
-topMovies=g.sort_values(ascending=False)[:15]
+topMovies=g.sort_values(ascending=False)[:-1]
 
 top_r = ratings.join(topUsers, rsuffix='_r', how='inner', on='userId')
 top_r = top_r.join(topMovies, rsuffix='_r', how='inner', on='movieId')
